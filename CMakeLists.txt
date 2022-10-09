@@ -61,7 +61,7 @@ drogon_create_views(${PROJECT_NAME} ${CMAKE_CURRENT_SOURCE_DIR}/views
 include_directories(/usr/local/include)
 link_directories(/usr/local/lib)
 
-target_link_libraries(${PROJECT_NAME} PUBLIC ImageMagick-7)
+target_link_libraries(${PROJECT_NAME} PUBLIC ImageMagick-7.1.0)
 target_include_directories(${PROJECT_NAME}
                            PRIVATE ${CMAKE_CURRENT_SOURCE_DIR}
                                    ${CMAKE_CURRENT_SOURCE_DIR}/models)

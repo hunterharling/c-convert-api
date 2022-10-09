@@ -1,5 +1,5 @@
 #include <drogon/drogon.h>
-#include </usr/local/include/ImageMagick-7/Magick++.h>
+#include <Magick++.h>
 using namespace drogon;
 using namespace Magick;
 
