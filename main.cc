@@ -1,14 +1,28 @@
 #include <drogon/drogon.h>
-#include <Magick++.h>
 using namespace drogon;
-using namespace Magick;
 
 // Method to convert filetype
-std::string convert(std::string inp) {
+std::string convert(std::string inpFile, std::string toFileType) {
     std::cout << "working...";
-    Image image;
+    std::string delimiter = ".";
+    std::string fileName = inpFile.substr(0, inpFile.find(delimiter));
+
+    LOG_INFO << "convert "+inpFile+" "+fileName+"."+toFileType;
     
-    return inp;
+    std::string script = "convert ./uploads/"+inpFile+" ./uploads/"+fileName+".pdf";
+    std::string rmsh = "rm ./uploads/"+inpFile;
+    
+    const char *chscript = script.c_str();
+    const char *rmscript = rmsh.c_str();
+
+    // Run convert cmd
+    system(chscript);
+
+    // Remove origional file
+    system(rmscript);
+
+    // Return name of converted img
+    return fileName+"."+toFileType;
 }
 
 int main()
@@ -35,15 +49,22 @@ int main()
             // Get file location for response
             std::string fileName = file.getFileName();
 
+            // Save file
+            file.save();
+
             // TODO: implement convertImg
-            std::string convertedImg = convert(fileName);
+            std::string toFileType = req->getParameter("toFile");
+
+            req->getParameters
+
+            LOG_INFO << toFileType;
+
+            std::string convertedImg = convert(fileName, toFileType);
 
             // Create response
             auto resp = HttpResponse::newHttpResponse();
             resp->setBody(convertedImg);
 
-            // Save file
-            file.save();
             LOG_INFO << "The uploaded file has been saved to the ./uploads "
                         "directory. ConvertedImg: "+convertedImg;
 
