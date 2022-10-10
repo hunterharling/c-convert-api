@@ -140,6 +140,9 @@
             "js",
             "css",
             "html",
+            "pdf",
+            "heic",
+            "svg",
             "ico",
             "swf",
             "xap",
@@ -152,6 +155,7 @@
         "mime": {
             // "text/markdown": "md",
             // "text/gemini": ["gmi", "gemini"]
+            "application/pdf": "pdf"
         },
         //locations: An array of locations of static files for GET requests.
         "locations": [
@@ -181,6 +185,10 @@
             },
             {
                 "default_content_type": "text/javascript",
+                "alias": ""
+            },
+            {
+                "default_content_type": "application/pdf",
                 "alias": ""
             }
         ],

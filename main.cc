@@ -9,7 +9,7 @@ std::string convert(std::string inpFile, std::string toFileType) {
 
     LOG_INFO << "convert "+inpFile+" "+fileName+"."+toFileType;
     
-    std::string script = "convert ./uploads/"+inpFile+" ./uploads/"+fileName+".pdf";
+    std::string script = "convert ./uploads/"+inpFile+" ./uploads/"+fileName+"."+toFileType;
     std::string rmsh = "rm ./uploads/"+inpFile;
     
     const char *chscript = script.c_str();
@@ -28,11 +28,17 @@ std::string convert(std::string inpFile, std::string toFileType) {
 int main()
 {
     // Register API handler
+    app().registerPostHandlingAdvice(
+        [](const drogon::HttpRequestPtr &req, const drogon::HttpResponsePtr &resp) {
+            //LOG_DEBUG << "postHandling1";
+            resp->addHeader("Access-Control-Allow-Origin", "*");
+        });
+
     app().registerHandler(
         "/upload_endpoint",
         [](const HttpRequestPtr &req,
            std::function<void(const HttpResponsePtr &)> &&callback) {
-            MultiPartParser fileUpload;
+            MultiPartParser fileUpload; 
 
             // Check for only one file
             if (fileUpload.parse(req) != 0 || fileUpload.getFiles().size() != 1)
@@ -53,15 +59,14 @@ int main()
             file.save();
 
             // TODO: implement convertImg
-            std::string toFileType = req->getParameter("toFile");
-
-            req->getParameters
-
-            LOG_INFO << toFileType;
+            std::string delimiter = "__";
+            std::string toFileType = fileName.substr(0, fileName.find(delimiter));;
 
             std::string convertedImg = convert(fileName, toFileType);
 
             // Create response
+            auto imgResp = HttpResponse::newFileResponse("./uploads/"+convertedImg);
+
             auto resp = HttpResponse::newHttpResponse();
             resp->setBody(convertedImg);
 
@@ -69,7 +74,7 @@ int main()
                         "directory. ConvertedImg: "+convertedImg;
 
             // Return response
-            callback(resp);
+            callback(imgResp);
         },
         {Post});
 
