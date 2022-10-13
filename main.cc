@@ -27,13 +27,12 @@ std::string convert(std::string inpFile, std::string toFileType) {
 
 int main()
 {
-    // Register API handler
     app().registerPostHandlingAdvice(
         [](const drogon::HttpRequestPtr &req, const drogon::HttpResponsePtr &resp) {
-            //LOG_DEBUG << "postHandling1";
             resp->addHeader("Access-Control-Allow-Origin", "*");
         });
 
+    // Register API handler
     app().registerHandler(
         "/upload_endpoint",
         [](const HttpRequestPtr &req,
@@ -58,15 +57,13 @@ int main()
             // Save file
             file.save();
 
-            // TODO: implement convertImg
+            // Convert file and return new filename
             std::string delimiter = "__";
             std::string toFileType = fileName.substr(0, fileName.find(delimiter));;
 
             std::string convertedImg = convert(fileName, toFileType);
 
             // Create response
-            auto imgResp = HttpResponse::newFileResponse("./uploads/"+convertedImg);
-
             auto resp = HttpResponse::newHttpResponse();
             resp->setBody(convertedImg);
 
@@ -74,11 +71,11 @@ int main()
                         "directory. ConvertedImg: "+convertedImg;
 
             // Return response
-            callback(imgResp);
+            callback(resp);
         },
         {Post});
 
-    LOG_INFO << "Server running on 0.0.0.0:8001";
+    LOG_INFO << "Server running on 0.0.0.0:8002";
     app()
         .setClientMaxBodySize(20 * 2000 * 2000)
         .setUploadPath("./uploads")

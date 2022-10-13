@@ -190,6 +190,14 @@
             {
                 "default_content_type": "application/pdf",
                 "alias": ""
+            },
+            {
+                "default_content_type": "application/json",
+                "alias": ""
+            },
+            {
+                "default_content_type": "application/pdf",
+                "alias": "/uploads"
             }
         ],
         //max_connections: maximum number of connections, 100000 by default
