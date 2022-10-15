@@ -7,6 +7,7 @@ function App() {
       <header>
         CVAPI - A Fast, C++ Based Image Conversion API
       </header>
+      <p></p>
 
       <Uploader />
     </div>

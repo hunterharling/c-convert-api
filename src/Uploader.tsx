@@ -10,12 +10,12 @@ const Uploader = () => {
   const [newImg, setNewImg] = useState("");
 
   const uploadFile = () => {
-    let url = "http://0.0.0.0:8002/upload_endpoint";
+    let url = "http://0.0.0.0:8002/upload_endpoint?filetype="+fileType;
 
     console.log(file);
 
     let form = new FormData();
-    let randomFileName = fileType + "__" + Math.floor(Math.random()*10000000) +"."+ file?.name.split(".")[1];
+    let randomFileName = Math.floor(Math.random()*10000000) + "."+ file?.name.split(".")[1];
     // This does attach the image, even though ts complains
     // @ts-ignore
     form.append("file", file, randomFileName);

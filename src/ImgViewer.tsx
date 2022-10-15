@@ -6,8 +6,11 @@ const ImgViewer: React.FC<{
 }> = (props) => {
   return (
     <div className="img-viewer">
-      <p>{props.imgName}</p>
-      <img src={"/uploads/"+props.img} />
+      <a href={"/uploads/"+props.img+"?force=true"} download={true}>
+        {" "}
+        <p>{props.imgName}</p>
+      </a>
+      <img src={"/uploads/" + props.img} />
     </div>
   );
 };

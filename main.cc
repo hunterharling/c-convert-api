@@ -34,10 +34,13 @@ int main()
 
     // Register API handler
     app().registerHandler(
-        "/upload_endpoint",
+        "/upload_endpoint?filetype={filetype}",
         [](const HttpRequestPtr &req,
-           std::function<void(const HttpResponsePtr &)> &&callback) {
-            MultiPartParser fileUpload; 
+           std::function<void(const HttpResponsePtr &)> &&callback, const std::string &filetype) {
+            MultiPartParser fileUpload;
+            
+            LOG_INFO << "name below";
+            LOG_INFO << filetype;
 
             // Check for only one file
             if (fileUpload.parse(req) != 0 || fileUpload.getFiles().size() != 1)
@@ -58,10 +61,7 @@ int main()
             file.save();
 
             // Convert file and return new filename
-            std::string delimiter = "__";
-            std::string toFileType = fileName.substr(0, fileName.find(delimiter));;
-
-            std::string convertedImg = convert(fileName, toFileType);
+            std::string convertedImg = convert(fileName, filetype);
 
             // Create response
             auto resp = HttpResponse::newHttpResponse();
