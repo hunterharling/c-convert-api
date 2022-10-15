@@ -10,7 +10,7 @@ const Uploader = () => {
   const [newImg, setNewImg] = useState("");
 
   const uploadFile = () => {
-    let url = "http://0.0.0.0:8002/upload_endpoint?filetype="+fileType;
+    let url = "/upload_endpoint?filetype="+fileType;
 
     console.log(file);
 
