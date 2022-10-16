@@ -1,19 +1,17 @@
 # CVAPI - Image Conversion API written in C++
 
-A C++ backend API that converts files to different formats.
+A C++ API that converts files to different image formats.
 
 Uses TypeScript and React.js for the user interface.
 
-## Running the C++ server:
+## Building and running the app:
 ```sh
+npm i
+npm run build
+
 cd build
 cmake ..
 make
 ./cvapi
 ```
-
-## Testing the React frontend:
-```sh
-npm i
-npm start
-```
+The app will be accessible at http://localhost:8002
