@@ -13,7 +13,7 @@ function App() {
     let fileType = "jpg";
 
     // API URL
-    let url = "http://0.0.0.0:8002/upload_endpoint?filetype="+fileType;
+    let url = "/upload_endpoint?filetype="+fileType;
     let fileName = "myfile.heic";
 
     // Get file from HTML
@@ -23,7 +23,7 @@ function App() {
 
     if (file && fileType) {
       axios.post(url, form).then((res) => {
-        // URL of converted file ex: "https://__domain__/uploads/123847.jpg"
+        // URL of converted file ex: "https://__domain__/uploads/123847.jpg" where __domain__ = domain name
         console.log(res.data);
       });
     }
