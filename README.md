@@ -1,4 +1,4 @@
-# CVAPI - Image Conversion API written in C++
+# C Convert API - Image Conversion API written in C++
 
 A C++ API that converts files to different image formats.
 
@@ -12,6 +12,6 @@ npm run build
 cd build
 cmake ..
 make
-./cvapi
+./ccapi
 ```
 The app will be accessible at http://localhost:8002
