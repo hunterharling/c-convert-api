@@ -12,6 +12,6 @@ npm run build
 cd build
 cmake ..
 make
-./ccapi
+./cvapi
 ```
 The app will be accessible at http://localhost:8002
